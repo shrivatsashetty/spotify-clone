@@ -1,0 +1,28 @@
+
+.page-content {
+    display: grid;
+    grid-template-areas: 
+    "header header header header"
+    "nav    main   main   main"
+    "aside  aside  aside  aside";
+}
+
+.header {
+    grid-area: header;
+    height: 50px;
+}
+
+.nav {
+    grid-area: nav;
+    height: calc(100vh - 100px);
+}
+
+.main {
+    grid-area: main;
+    height: calc(100vh - 100px);
+}
+
+.aside {
+    grid-area: aside;
+    height: 50px;
+}

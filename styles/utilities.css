@@ -1,0 +1,62 @@
+
+
+.container {
+    border: 2px solid red;
+    padding: 3px;
+    margin: 3px;
+    border-radius: 10px;
+}
+
+
+.flexbox {
+    display: flex;
+}
+
+/* to apply a black background */
+.bg-black {
+    background-color: black;
+}
+
+.bg-light-grey {
+    background-color: #b3b3b3;
+}
+
+.bg-dark-grey {
+    background-color: #7c7c7c;
+}
+
+/* to give white color to the content */
+.color-white {
+    color: white;
+}
+
+/* to justify the contents of a flexbox to center */
+.justify-content-center {
+    justify-content: center;
+}
+
+/* to align the flexbox items to center */
+.align-items-center {
+    align-items: center;
+}
+
+/* to invert the colors of icons from black to white */
+.invert {
+    filter: invert(1);
+}
+
+/* to give rounded border effect */
+.border-rounded {
+    border-radius: 7px;
+}
+
+/* level-1 margin */
+.m-1 {
+    margin: 5px;
+}
+/* level-1 padding */
+.p-1 {
+    padding: 8px;
+}
+
+
