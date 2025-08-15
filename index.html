@@ -17,16 +17,85 @@
             href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
             rel="stylesheet"
         />
-        <link rel="stylesheet" href="styles/style.css"/>
-        <link rel="stylesheet" href="styles/utilities.css"/>
+        <link rel="stylesheet" href="styles/utilities.css" />
         <link rel="stylesheet" href="styles/common.css" />
+        <link rel="stylesheet" href="styles/global-navbar.css">
+        <link rel="stylesheet" href="styles/style.css" />
+        
         <script src="scripts/script.js" defer></script>
     </head>
-    <body>
-        <div class="page-content container">
-            <div class="header container"></div>
+    <body class="bg-black">
+        <div class="page-content container bg-black">
+            <div
+                id="global-nav-bar"
+                class="header global-nav container flexbox"
+            >
+                <div
+                    class="container-global-nav-items flexbox align-items-center"
+                >
+                    <a class="global-nav-item" href="/">
+                        <img
+                            class="invert"
+                            src="assets/icons/spotify_logo.svg"
+                            alt="Spotify-Logo"
+                        />
+                    </a>
+
+                    <button
+                        id="btn-home"
+                        class="btn global-nav-item bg-light-gray invert"
+                    >
+                        <img
+                            src="assets/icons/home.svg"
+                            alt="Spotify Home"
+                            class="global-nav-item"
+                        />
+                    </button>
+
+                    <form id="frm-nav-search" class="global-nav-item flexbox align-items-center">
+                        <div class="form-contents flexbox">
+                            <img
+                                class="invert"
+                                src="assets/icons/search.svg"
+                                alt="Search Song"
+                            />
+                            <input
+                                id="nav-input-search-song"
+                                type="text"
+                                placeholder="What do you want to play?"
+                            />
+                            <img
+                                src="assets/icons/browse.svg"
+                                class="invert"
+                                alt="Browse"
+                            />
+                        </div>
+                    </form>
+                </div>
+
+                <!-- <div id="g-nav-items-rt" class="g-nav-items">
+                    <button type="button">
+                        Premium
+                    </button>
+
+                    <button type="button">
+                        Support
+                    </button>
+
+                    <button type="button">
+                        Download
+                    </button>
+
+                    <div class="delimiter"></div>
+
+                    <div class="signup-login"></div>
+                </div> -->
+            </div>
+
             <div class="nav container"></div>
+
             <div class="main container"></div>
+
             <div class="aside container"></div>
         </div>
     </body>

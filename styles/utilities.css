@@ -7,27 +7,13 @@
     border-radius: 10px;
 }
 
-
+/* flexbox utilities */
 .flexbox {
     display: flex;
 }
 
-/* to apply a black background */
-.bg-black {
-    background-color: black;
-}
-
-.bg-light-grey {
-    background-color: #b3b3b3;
-}
-
-.bg-dark-grey {
-    background-color: #7c7c7c;
-}
-
-/* to give white color to the content */
-.color-white {
-    color: white;
+.flex-col {
+    flex-direction: column;
 }
 
 /* to justify the contents of a flexbox to center */
@@ -40,14 +26,37 @@
     align-items: center;
 }
 
+/* to apply a black background */
+.bg-black {
+    background-color: black;
+}
+
+.bg-light-gray {
+    background-color: #b3b3b3;
+}
+
+.bg-dark-gray {
+    background-color: #7c7c7c;
+}
+
+/* to give white color to the content */
+.color-white {
+    color: white;
+}
+
+
 /* to invert the colors of icons from black to white */
 .invert {
     filter: invert(1);
 }
 
 /* to give rounded border effect */
-.border-rounded {
-    border-radius: 7px;
+.border-rounded-1 {
+    border-radius: 7ppx;
+}
+
+.border-rounded-2 {
+    border-radius: 20px;
 }
 
 /* level-1 margin */
@@ -59,4 +68,7 @@
     padding: 8px;
 }
 
+.txt-size-base {
+    font-size: 1rem;
+}
 
