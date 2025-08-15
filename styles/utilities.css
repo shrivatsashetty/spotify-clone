@@ -4,7 +4,6 @@
     border: 2px solid red;
     padding: 3px;
     margin: 3px;
-    border-radius: 10px;
 }
 
 /* flexbox utilities */
@@ -12,7 +11,7 @@
     display: flex;
 }
 
-.flex-col {
+.flex-dir-col {
     flex-direction: column;
 }
 
@@ -32,7 +31,7 @@
 }
 
 .bg-light-gray {
-    background-color: #b3b3b3;
+    background-color: rgb(47 47 47);
 }
 
 .bg-dark-gray {
@@ -50,25 +49,36 @@
     filter: invert(1);
 }
 
-/* to give rounded border effect */
-.border-rounded-1 {
-    border-radius: 7ppx;
+/* border related sytles */
+.border-none {
+    border: none;
 }
 
-.border-rounded-2 {
-    border-radius: 20px;
+/* to give rounded border effect */
+.rounded-corners {
+    border-radius: 10px;
+}
+
+.border-squiricle {
+    border-radius: 27px;
 }
 
 /* level-1 margin */
-.m-1 {
+.mar-1 {
     margin: 5px;
 }
 /* level-1 padding */
-.p-1 {
+.pad-1 {
     padding: 8px;
 }
 
 .txt-size-base {
     font-size: 1rem;
+    font-weight: 400;
+}
+
+.img-btn-sm {
+    height: 25px;
+    width: 25px;
 }
 

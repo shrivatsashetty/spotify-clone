@@ -7,11 +7,6 @@
 /* setting the height-widt of the Spotify Home button in global-navbar */
 button.global-nav-item {
     border-radius: 50%;
-    padding: 5px;
-}
-button.global-nav-item img {
-    height: 25px;
-    width: 25px;
 }
 
 form.global-nav-item {
@@ -20,7 +15,6 @@ form.global-nav-item {
     background-color: rgb(47 47 47);
     width: 300px;
     justify-content: center;
-    border-radius: 30px;
 }
 
 form.global-nav-item .form-contents {
@@ -29,9 +23,15 @@ form.global-nav-item .form-contents {
     
 }
 
+/* styles for the input element itself */
 .form-contents input {
     width: 200px;
     background-color: inherit;
-    border: none;
     outline: none;
 }
+/* styles for the placeholder of the input element */
+.form-contents input::placeholder {
+    font-size: 1rem;
+    font-weight: 400;
+}
+

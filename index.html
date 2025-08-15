@@ -8,7 +8,7 @@
             rel="icon"
             sizes="32x32"
             type="image/png"
-            href="assets/icons/spotify_icon.png"
+            href="assets/icons/spotify_favicon.png"
         />
         <!-- importing fonts from Google Fonts -->
         <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -28,12 +28,12 @@
         <div class="page-content container bg-black">
             <div
                 id="global-nav-bar"
-                class="header global-nav container flexbox"
+                class="header global-nav pad-1 flexbox"
             >
                 <div
                     class="container-global-nav-items flexbox align-items-center"
                 >
-                    <a class="global-nav-item" href="/">
+                    <a class="global-nav-item" href="/" title="Spotify">
                         <img
                             class="invert"
                             src="assets/icons/spotify_logo.svg"
@@ -43,32 +43,40 @@
 
                     <button
                         id="btn-home"
-                        class="btn global-nav-item bg-light-gray invert"
+                        class="global-nav-item border-none bg-light-gray pad-1"
+                        title="Home"
                     >
                         <img
                             src="assets/icons/home.svg"
                             alt="Spotify Home"
-                            class="global-nav-item"
+                            class="global-nav-item invert img-btn-sm"
                         />
                     </button>
 
-                    <form id="frm-nav-search" class="global-nav-item flexbox align-items-center">
+                    <form id="frm-nav-search" 
+                        class="global-nav-item border-squiricle flexbox align-items-center">
                         <div class="form-contents flexbox">
                             <img
-                                class="invert"
+                                class="invert img-btn-sm"
                                 src="assets/icons/search.svg"
+                                title="Search"
                                 alt="Search Song"
                             />
                             <input
                                 id="nav-input-search-song"
+                                class="border-none txt-size-base"
                                 type="text"
                                 placeholder="What do you want to play?"
                             />
-                            <img
-                                src="assets/icons/browse.svg"
-                                class="invert"
-                                alt="Browse"
-                            />
+
+                            <button class="border-none bg-light-gray" type="submit">  
+                                <img
+                                    src="assets/icons/browse.svg"
+                                    class="invert img-btn-sm"
+                                    title="Browse"
+                                    alt="Browse"
+                                />
+                            </button>
                         </div>
                     </form>
                 </div>
@@ -92,11 +100,11 @@
                 </div> -->
             </div>
 
-            <div class="nav container"></div>
+            <div class="nav container rounded-corners"></div>
 
-            <div class="main container"></div>
+            <div class="main container rounded-corners"></div>
 
-            <div class="aside container"></div>
+            <div class="aside container rounded-corners"></div>
         </div>
     </body>
 </html>
