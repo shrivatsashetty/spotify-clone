@@ -1,0 +1,23 @@
+
+.btn-plus img {
+    height: 16px;
+    width: 16px;
+}
+
+.sidebar footer {
+    column-gap: 15px;
+    flex-wrap: wrap;
+    row-gap: 13px;
+}
+
+.sidebar footer a {
+    white-space: nowrap;
+    flex-shrink: 1;
+    font-size: 0.8rem;
+    text-decoration: none;
+    color: rgb(158, 158, 158);
+}
+
+.sidebar footer a:hover {
+    text-decoration: underline;
+}

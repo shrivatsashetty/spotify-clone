@@ -1,0 +1,27 @@
+
+.page-content {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-areas: 
+        "page-header page-header page-header page-header"
+        "sidebar    main   main   main";
+}
+
+.page-header {
+    grid-area: page-header;
+    height: 50px;
+}
+
+.sidebar {
+    grid-area: sidebar;
+    height: calc(100vh - 100px);
+}
+
+.main {
+    grid-area: main;
+    height: calc(100vh - 100px);
+}
+
+
+
+

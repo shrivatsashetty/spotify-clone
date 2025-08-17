@@ -20,17 +20,17 @@
         <link rel="stylesheet" href="styles/utilities.css" />
         <link rel="stylesheet" href="styles/common.css" />
         <link rel="stylesheet" href="styles/global-navbar.css">
-        <link rel="stylesheet" href="styles/style.css" />
+        <link rel="stylesheet" href="styles/grid-layout.css" />
+        <link rel="stylesheet" href="styles/sidebar.css">
         
         <script src="scripts/script.js" defer></script>
     </head>
     <body class="bg-black">
-        <div class="page-content container bg-black">
-            <div
-                id="global-nav-bar"
-                class="header global-nav pad-1 flexbox"
+        <div class="page-content bg-black pad-1">
+            <header
+                class="header page-header pad-1 flexbox space-between"
             >
-                <div
+                <nav
                     class="container-global-nav-items flexbox align-items-center"
                 >
                     <a class="global-nav-item" href="/" title="Spotify">
@@ -43,25 +43,26 @@
 
                     <button
                         id="btn-home"
-                        class="global-nav-item border-none bg-light-gray pad-1"
+                        class="global-nav-item border-none btn-rounded bg-light-gray pad-1"
                         title="Home"
                     >
                         <img
                             src="assets/icons/home.svg"
                             alt="Spotify Home"
-                            class="global-nav-item invert img-btn-sm"
+                            class="global-nav-item invert img-btn-sm cursor-pointer"
                         />
                     </button>
 
                     <form id="frm-nav-search" 
-                        class="global-nav-item border-squiricle flexbox align-items-center">
+                        class="global-nav-item border-squiricle flexbox align-items-center bg-light-gray">
                         <div class="form-contents flexbox">
                             <img
-                                class="invert img-btn-sm"
+                                class="invert img-btn-sm cursor-pointer"
                                 src="assets/icons/search.svg"
                                 title="Search"
                                 alt="Search Song"
                             />
+
                             <input
                                 id="nav-input-search-song"
                                 class="border-none txt-size-base"
@@ -72,39 +73,58 @@
                             <button class="border-none bg-light-gray" type="submit">  
                                 <img
                                     src="assets/icons/browse.svg"
-                                    class="invert img-btn-sm"
+                                    class="invert img-btn-sm cursor-pointer"
                                     title="Browse"
                                     alt="Browse"
                                 />
                             </button>
                         </div>
                     </form>
-                </div>
+                </nav>
 
                 <!-- <div id="g-nav-items-rt" class="g-nav-items">
-                    <button type="button">
-                        Premium
-                    </button>
 
-                    <button type="button">
-                        Support
-                    </button>
-
-                    <button type="button">
-                        Download
-                    </button>
-
-                    <div class="delimiter"></div>
-
-                    <div class="signup-login"></div>
                 </div> -->
+            </header>
+
+
+
+
+            <div class="sidebar flexbox flex-dir-col space-between rounded-corners bg-light-gray pad-1 mar-1">
+
+                <header class="sidebar-header flexbox space-between pad-1 align-items-center">
+
+                    <h2 class="txt-size-base" >Your Library</h2>
+
+                    <button id="btn-add-to-lib " 
+                        class="btn-plus btn-rounded border-none bg-light-gray pad-1 cursor-pointer" 
+                        type="button"
+                    >
+                        <img class="invert" src="assets/icons/plus-icon.svg" alt="Add Song">
+                    </button>
+
+                </header>
+
+                <footer class="footer flexbox pad-1">
+                    <a href="">Legal</a> 
+
+                    <a href="">Saftey & Privacy Center</a> 
+
+                    <a href="">Privacy Policy</a> 
+
+                    <a href="">Cookies</a> 
+
+                    <a href="">About Ads</a> 
+
+                    <a href="">Accessibility</a> 
+                </footer>
+                
             </div>
 
-            <div class="nav container rounded-corners"></div>
 
-            <div class="main container rounded-corners"></div>
 
-            <div class="aside container rounded-corners"></div>
+            <main class="main bg-light-gray rounded-corners pad-1 mar-1"></main>
+
         </div>
     </body>
 </html>
