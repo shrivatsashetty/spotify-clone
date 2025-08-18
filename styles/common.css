@@ -1,3 +1,12 @@
+
+/* Declaring Global CSS Variables */
+:root {
+    --glob-col-light-gray: rgb(27 27 27);
+    --glob-col-dark-gray: rgb(47 47 47);
+    --spotify-green: #19d95c;
+}
+
+
 /* remove the default margin & padding provided by the browser */
 * {
     margin: 0;
@@ -6,10 +15,6 @@
     color: white;
 }
 
-/* Declaring Global CSS Variables */
-:root {
-    --glob-col-light-gray: rgb(27 27 27);
-    --glob-col-dark-gray: rgb(47 47 47);
+body {
+    overflow-y: hidden;
 }
-
-

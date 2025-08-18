@@ -1,0 +1,71 @@
+
+.container-playlists {
+    row-gap: 20px;
+    overflow-y: scroll;
+}
+
+.container-cards {
+    flex-wrap: wrap;
+    row-gap: 8px;
+    column-gap: 8px;
+    margin-left: 20px;
+}
+
+.card {
+    width: 172px;
+    padding: 10px;
+    row-gap: 5px;
+
+    position: relative;
+    z-index: 10;
+}
+
+.card:hover {
+    background-color: var(--glob-col-dark-gray);
+}
+
+.card-heading, .card-desc {
+    word-wrap: break-word;
+}
+
+.card-img {
+    width: 100%;
+    object-fit: contain;
+} 
+
+.card .card-desc {
+    font-size: 0.9rem;
+    font-weight: 300;
+}
+
+/* selector to select elements
+ * with both the quiried classes */
+.btn-play.btn-spotify-play {
+    height: 44px;
+    width: 44px;
+    background-color: var(--spotify-green);
+    position: absolute;
+    right: 18px;
+    bottom: 55px;
+    z-index: 25;
+
+    /* below are the two CSS properties we
+     * select for transform */
+    opacity: 0;
+    transform: translateY(0px);
+
+    /* applying css transition */
+    transition-property: transform, opacity; /* propeties that will be targetted */
+    transition-duration: 0.25s; /* duration of time over which transition will take place */
+    transition-timing-function: ease-in-out; /* smootheness of transition */
+}
+
+.card:hover .btn-spotify-play {
+    opacity: 1;
+    transform: translateY(-8px);
+}
+
+.btn-play img {
+    width: 22px;
+    height: 22px;
+}

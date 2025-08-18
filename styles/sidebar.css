@@ -1,3 +1,6 @@
+.btn-plus:hover {
+    background-color: var(--glob-col-dark-gray);
+}
 
 .btn-plus img {
     height: 16px;
