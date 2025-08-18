@@ -69,3 +69,21 @@
     width: 22px;
     height: 22px;
 }
+
+/* Styling the scrollbars */
+/* .container-playlists::-webkit-scrollbar-track {
+    background-color: red;
+} */
+
+/* @supports selector(::-webkit-scrollbar) {
+
+} */
+.container-playlists::-webkit-scrollbar {
+    opacity: 0;
+    width: 15px;
+}
+
+.container-playlists::-webkit-scrollbar-thumb {
+    background: rgb(80, 80, 80);  
+    border-radius: 8px;
+}
