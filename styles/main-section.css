@@ -1,7 +1,21 @@
+/* fix the width of all the direct children of .main */
+.main > * {
+    width: calc(100% - (2 * var(--val-pad-1)));
+}
+
+/* styling the scrollbar of the main section */
+.main::-webkit-scrollbar {
+    opacity: 0;
+    width: 15px;
+}
+
+.main::-webkit-scrollbar-thumb {
+    background: rgb(80, 80, 80);  
+    border-radius: 8px;
+}
 
 .container-playlists {
     row-gap: 20px;
-    overflow-y: scroll;
 }
 
 .container-cards {
@@ -78,12 +92,22 @@
 /* @supports selector(::-webkit-scrollbar) {
 
 } */
-.container-playlists::-webkit-scrollbar {
-    opacity: 0;
-    width: 15px;
+
+.media-controls {
+    height: 50px;
+    background-color: rgb(21, 37, 21);
+
 }
 
-.container-playlists::-webkit-scrollbar-thumb {
-    background: rgb(80, 80, 80);  
-    border-radius: 8px;
+.media-player {
+    column-gap: 30px;
+}
+
+.btn-media-player {
+    height: 50%;
+    background: none;
+}
+
+.btn-media-player img {
+    height: 100%;
 }

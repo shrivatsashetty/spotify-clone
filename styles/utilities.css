@@ -72,7 +72,7 @@
 }
 /* level-1 padding */
 .pad-1 {
-    padding: 8px;
+    padding: var(--val-pad-1);
 }
 
 .txt-size-base {

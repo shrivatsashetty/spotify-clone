@@ -19,19 +19,17 @@
         />
         <link rel="stylesheet" href="styles/utilities.css" />
         <link rel="stylesheet" href="styles/common.css" />
-        <link rel="stylesheet" href="styles/global-navbar.css">
+        <link rel="stylesheet" href="styles/global-navbar.css" />
         <link rel="stylesheet" href="styles/grid-layout.css" />
-        <link rel="stylesheet" href="styles/sidebar.css">
-        <link rel="stylesheet" href="styles/main-section.css">
-        
+        <link rel="stylesheet" href="styles/sidebar.css" />
+        <link rel="stylesheet" href="styles/main-section.css" />
+
         <script src="scripts/script.js" defer></script>
     </head>
-    
+
     <body class="bg-black">
         <div class="page-content bg-black pad-1">
-            <header
-                class="header page-header pad-1 flexbox space-between"
-            >
+            <header class="header page-header pad-1 flexbox space-between">
                 <nav
                     class="container-global-nav-items flexbox align-items-center"
                 >
@@ -55,8 +53,10 @@
                         />
                     </button>
 
-                    <form id="frm-nav-search" 
-                        class="global-nav-item border-squiricle flexbox align-items-center bg-light-gray">
+                    <form
+                        id="frm-nav-search"
+                        class="global-nav-item border-squiricle flexbox align-items-center bg-light-gray"
+                    >
                         <div class="form-contents flexbox">
                             <img
                                 class="invert img-btn-sm cursor-pointer"
@@ -72,7 +72,10 @@
                                 placeholder="What do you want to play?"
                             />
 
-                            <button class="border-none bg-light-gray" type="submit">  
+                            <button
+                                class="border-none bg-light-gray"
+                                type="submit"
+                            >
                                 <img
                                     src="assets/icons/browse.svg"
                                     class="invert img-btn-sm cursor-pointer"
@@ -89,462 +92,103 @@
                 </div> -->
             </header>
 
+            <div
+                class="sidebar flexbox flex-dir-col space-between rounded-corners bg-light-gray pad-1 mar-1"
+            >
+                <header
+                    class="sidebar-header flexbox space-between pad-1 align-items-center"
+                >
+                    <h2 class="txt-size-base">Your Library</h2>
 
-
-
-            <div class="sidebar flexbox flex-dir-col space-between rounded-corners bg-light-gray pad-1 mar-1">
-
-                <header class="sidebar-header flexbox space-between pad-1 align-items-center">
-
-                    <h2 class="txt-size-base" >Your Library</h2>
-
-                    <button id="btn-add-to-lib " 
-                        class="btn-plus btn-rounded border-none bg-light-gray pad-1 cursor-pointer" 
+                    <button
+                        id="btn-add-to-lib "
+                        class="btn-plus btn-rounded border-none bg-light-gray pad-1 cursor-pointer"
                         type="button"
                     >
-                        <img class="invert" src="assets/icons/plus-icon.svg" alt="Add Song">
+                        <img
+                            class="invert"
+                            src="assets/icons/plus-icon.svg"
+                            alt="Add Song"
+                        />
                     </button>
-
                 </header>
 
                 <footer class="footer flexbox pad-1">
-                    <a href="">Legal</a> 
+                    <a href="">Legal</a>
 
-                    <a href="">Saftey & Privacy Center</a> 
+                    <a href="">Saftey & Privacy Center</a>
 
-                    <a href="">Privacy Policy</a> 
+                    <a href="">Privacy Policy</a>
 
-                    <a href="">Cookies</a> 
+                    <a href="">Cookies</a>
 
-                    <a href="">About Ads</a> 
+                    <a href="">About Ads</a>
 
-                    <a href="">Accessibility</a> 
+                    <a href="">Accessibility</a>
                 </footer>
-                
             </div>
 
-            <main class="main bg-light-gray rounded-corners flexbox flex-dir-col pad-1 mar-1">
-
+            <main
+                class="main bg-light-gray rounded-corners flexbox flex-dir-col space-between align-items-center pad-1 mar-1"
+            >
                 <div class="container-playlists flexbox flex-dir-col pad-1">
-
                     <h2>Spotify Playlists</h2>
 
                     <div class="container-cards flexbox">
-
-                        <div 
-                            class="card flexbox flex-dir-col rounded-corners cursor-pointer">
-
-                            <img 
+                        <div
+                            class="card flexbox flex-dir-col rounded-corners cursor-pointer"
+                        >
+                            <img
                                 class="card-img rounded-corners"
-                                src="assets/images/thumbnails/thumbnail-teri-mitti.jpeg" alt="Song Thumbnail"
-                            >
+                                src="assets/images/thumbnails/thumbnail-teri-mitti.jpeg"
+                                alt="Song Thumbnail"
+                            />
 
-                            <h3 class="card-heading txt-size-base">Teri Mitti</h3>
-                            
+                            <h3 class="card-heading txt-size-base">
+                                Teri Mitti
+                            </h3>
+
                             <p class="card-desc">Akshay Kumar</p>
 
-                            <button 
+                            <button
                                 type="button"
-                                class="btn-rounded  btn-play btn-spotify-play border-none cursor-pointer"
+                                class="btn-rounded btn-play btn-spotify-play border-none cursor-pointer"
                             >
-                                <img 
+                                <img
                                     id="img-btn-play"
                                     class=""
-                                    src="assets/icons/btn-play.svg" 
-                                    alt="Play Button">
+                                    src="assets/icons/btn-play.svg"
+                                    alt="Play Button"
+                                />
                             </button>
-
                         </div>
-
-
-
-
-
-
-                        <div 
-                            class="card flexbox flex-dir-col rounded-corners cursor-pointer">
-
-                            <img 
-                                class="card-img rounded-corners"
-                                src="assets/images/thumbnails/thumbnail-teri-mitti.jpeg" alt="Song Thumbnail"
-                            >
-
-                            <h3 class="card-heading txt-size-base">Teri Mitti</h3>
-                            
-                            <p class="card-desc">Akshay Kumar</p>
-
-                            <button 
-                                type="button"
-                                class="btn-rounded  btn-play btn-spotify-play border-none cursor-pointer"
-                            >
-                                <img 
-                                    id="img-btn-play"
-                                    class=""
-                                    src="assets/icons/btn-play.svg" 
-                                    alt="Play Button">
-                            </button>
-
-                        </div>
-
-                                                <div 
-                            class="card flexbox flex-dir-col rounded-corners cursor-pointer">
-
-                            <img 
-                                class="card-img rounded-corners"
-                                src="assets/images/thumbnails/thumbnail-teri-mitti.jpeg" alt="Song Thumbnail"
-                            >
-
-                            <h3 class="card-heading txt-size-base">Teri Mitti</h3>
-                            
-                            <p class="card-desc">Akshay Kumar</p>
-
-                            <button 
-                                type="button"
-                                class="btn-rounded  btn-play btn-spotify-play border-none cursor-pointer"
-                            >
-                                <img 
-                                    id="img-btn-play"
-                                    class=""
-                                    src="assets/icons/btn-play.svg" 
-                                    alt="Play Button">
-                            </button>
-
-                        </div>
-
-                                                <div 
-                            class="card flexbox flex-dir-col rounded-corners cursor-pointer">
-
-                            <img 
-                                class="card-img rounded-corners"
-                                src="assets/images/thumbnails/thumbnail-teri-mitti.jpeg" alt="Song Thumbnail"
-                            >
-
-                            <h3 class="card-heading txt-size-base">Teri Mitti</h3>
-                            
-                            <p class="card-desc">Akshay Kumar</p>
-
-                            <button 
-                                type="button"
-                                class="btn-rounded  btn-play btn-spotify-play border-none cursor-pointer"
-                            >
-                                <img 
-                                    id="img-btn-play"
-                                    class=""
-                                    src="assets/icons/btn-play.svg" 
-                                    alt="Play Button">
-                            </button>
-
-                        </div>
-
-                                                <div 
-                            class="card flexbox flex-dir-col rounded-corners cursor-pointer">
-
-                            <img 
-                                class="card-img rounded-corners"
-                                src="assets/images/thumbnails/thumbnail-teri-mitti.jpeg" alt="Song Thumbnail"
-                            >
-
-                            <h3 class="card-heading txt-size-base">Teri Mitti</h3>
-                            
-                            <p class="card-desc">Akshay Kumar</p>
-
-                            <button 
-                                type="button"
-                                class="btn-rounded  btn-play btn-spotify-play border-none cursor-pointer"
-                            >
-                                <img 
-                                    id="img-btn-play"
-                                    class=""
-                                    src="assets/icons/btn-play.svg" 
-                                    alt="Play Button">
-                            </button>
-
-                        </div>
-
-                                                <div 
-                            class="card flexbox flex-dir-col rounded-corners cursor-pointer">
-
-                            <img 
-                                class="card-img rounded-corners"
-                                src="assets/images/thumbnails/thumbnail-teri-mitti.jpeg" alt="Song Thumbnail"
-                            >
-
-                            <h3 class="card-heading txt-size-base">Teri Mitti</h3>
-                            
-                            <p class="card-desc">Akshay Kumar</p>
-
-                            <button 
-                                type="button"
-                                class="btn-rounded  btn-play btn-spotify-play border-none cursor-pointer"
-                            >
-                                <img 
-                                    id="img-btn-play"
-                                    class=""
-                                    src="assets/icons/btn-play.svg" 
-                                    alt="Play Button">
-                            </button>
-
-                        </div>
-
-                                                <div 
-                            class="card flexbox flex-dir-col rounded-corners cursor-pointer">
-
-                            <img 
-                                class="card-img rounded-corners"
-                                src="assets/images/thumbnails/thumbnail-teri-mitti.jpeg" alt="Song Thumbnail"
-                            >
-
-                            <h3 class="card-heading txt-size-base">Teri Mitti</h3>
-                            
-                            <p class="card-desc">Akshay Kumar</p>
-
-                            <button 
-                                type="button"
-                                class="btn-rounded  btn-play btn-spotify-play border-none cursor-pointer"
-                            >
-                                <img 
-                                    id="img-btn-play"
-                                    class=""
-                                    src="assets/icons/btn-play.svg" 
-                                    alt="Play Button">
-                            </button>
-
-                        </div>
-
-                                                <div 
-                            class="card flexbox flex-dir-col rounded-corners cursor-pointer">
-
-                            <img 
-                                class="card-img rounded-corners"
-                                src="assets/images/thumbnails/thumbnail-teri-mitti.jpeg" alt="Song Thumbnail"
-                            >
-
-                            <h3 class="card-heading txt-size-base">Teri Mitti</h3>
-                            
-                            <p class="card-desc">Akshay Kumar</p>
-
-                            <button 
-                                type="button"
-                                class="btn-rounded  btn-play btn-spotify-play border-none cursor-pointer"
-                            >
-                                <img 
-                                    id="img-btn-play"
-                                    class=""
-                                    src="assets/icons/btn-play.svg" 
-                                    alt="Play Button">
-                            </button>
-
-                        </div>
-
-
-                                                <div 
-                            class="card flexbox flex-dir-col rounded-corners cursor-pointer">
-
-                            <img 
-                                class="card-img rounded-corners"
-                                src="assets/images/thumbnails/thumbnail-teri-mitti.jpeg" alt="Song Thumbnail"
-                            >
-
-                            <h3 class="card-heading txt-size-base">Teri Mitti</h3>
-                            
-                            <p class="card-desc">Akshay Kumar</p>
-
-                            <button 
-                                type="button"
-                                class="btn-rounded  btn-play btn-spotify-play border-none cursor-pointer"
-                            >
-                                <img 
-                                    id="img-btn-play"
-                                    class=""
-                                    src="assets/icons/btn-play.svg" 
-                                    alt="Play Button">
-                            </button>
-
-                        </div>
-
-                                                <div 
-                            class="card flexbox flex-dir-col rounded-corners cursor-pointer">
-
-                            <img 
-                                class="card-img rounded-corners"
-                                src="assets/images/thumbnails/thumbnail-teri-mitti.jpeg" alt="Song Thumbnail"
-                            >
-
-                            <h3 class="card-heading txt-size-base">Teri Mitti</h3>
-                            
-                            <p class="card-desc">Akshay Kumar</p>
-
-                            <button 
-                                type="button"
-                                class="btn-rounded  btn-play btn-spotify-play border-none cursor-pointer"
-                            >
-                                <img 
-                                    id="img-btn-play"
-                                    class=""
-                                    src="assets/icons/btn-play.svg" 
-                                    alt="Play Button">
-                            </button>
-
-                        </div>
-
-                                                <div 
-                            class="card flexbox flex-dir-col rounded-corners cursor-pointer">
-
-                            <img 
-                                class="card-img rounded-corners"
-                                src="assets/images/thumbnails/thumbnail-teri-mitti.jpeg" alt="Song Thumbnail"
-                            >
-
-                            <h3 class="card-heading txt-size-base">Teri Mitti</h3>
-                            
-                            <p class="card-desc">Akshay Kumar</p>
-
-                            <button 
-                                type="button"
-                                class="btn-rounded  btn-play btn-spotify-play border-none cursor-pointer"
-                            >
-                                <img 
-                                    id="img-btn-play"
-                                    class=""
-                                    src="assets/icons/btn-play.svg" 
-                                    alt="Play Button">
-                            </button>
-
-                        </div>
-
-                                                <div 
-                            class="card flexbox flex-dir-col rounded-corners cursor-pointer">
-
-                            <img 
-                                class="card-img rounded-corners"
-                                src="assets/images/thumbnails/thumbnail-teri-mitti.jpeg" alt="Song Thumbnail"
-                            >
-
-                            <h3 class="card-heading txt-size-base">Teri Mitti</h3>
-                            
-                            <p class="card-desc">Akshay Kumar</p>
-
-                            <button 
-                                type="button"
-                                class="btn-rounded  btn-play btn-spotify-play border-none cursor-pointer"
-                            >
-                                <img 
-                                    id="img-btn-play"
-                                    class=""
-                                    src="assets/icons/btn-play.svg" 
-                                    alt="Play Button">
-                            </button>
-
-                        </div>
-
-                                                <div 
-                            class="card flexbox flex-dir-col rounded-corners cursor-pointer">
-
-                            <img 
-                                class="card-img rounded-corners"
-                                src="assets/images/thumbnails/thumbnail-teri-mitti.jpeg" alt="Song Thumbnail"
-                            >
-
-                            <h3 class="card-heading txt-size-base">Teri Mitti</h3>
-                            
-                            <p class="card-desc">Akshay Kumar</p>
-
-                            <button 
-                                type="button"
-                                class="btn-rounded  btn-play btn-spotify-play border-none cursor-pointer"
-                            >
-                                <img 
-                                    id="img-btn-play"
-                                    class=""
-                                    src="assets/icons/btn-play.svg" 
-                                    alt="Play Button">
-                            </button>
-
-                        </div>
-
-                                                <div 
-                            class="card flexbox flex-dir-col rounded-corners cursor-pointer">
-
-                            <img 
-                                class="card-img rounded-corners"
-                                src="assets/images/thumbnails/thumbnail-teri-mitti.jpeg" alt="Song Thumbnail"
-                            >
-
-                            <h3 class="card-heading txt-size-base">Teri Mitti</h3>
-                            
-                            <p class="card-desc">Akshay Kumar</p>
-
-                            <button 
-                                type="button"
-                                class="btn-rounded  btn-play btn-spotify-play border-none cursor-pointer"
-                            >
-                                <img 
-                                    id="img-btn-play"
-                                    class=""
-                                    src="assets/icons/btn-play.svg" 
-                                    alt="Play Button">
-                            </button>
-
-                        </div>
-
-
-                                                <div 
-                            class="card flexbox flex-dir-col rounded-corners cursor-pointer">
-
-                            <img 
-                                class="card-img rounded-corners"
-                                src="assets/images/thumbnails/thumbnail-teri-mitti.jpeg" alt="Song Thumbnail"
-                            >
-
-                            <h3 class="card-heading txt-size-base">Teri Mitti</h3>
-                            
-                            <p class="card-desc">Akshay Kumar</p>
-
-                            <button 
-                                type="button"
-                                class="btn-rounded  btn-play btn-spotify-play border-none cursor-pointer"
-                            >
-                                <img 
-                                    id="img-btn-play"
-                                    class=""
-                                    src="assets/icons/btn-play.svg" 
-                                    alt="Play Button">
-                            </button>
-
-                        </div>
-
-                                                <div 
-                            class="card flexbox flex-dir-col rounded-corners cursor-pointer">
-
-                            <img 
-                                class="card-img rounded-corners"
-                                src="assets/images/thumbnails/thumbnail-teri-mitti.jpeg" alt="Song Thumbnail"
-                            >
-
-                            <h3 class="card-heading txt-size-base">Teri Mitti</h3>
-                            
-                            <p class="card-desc">Akshay Kumar</p>
-
-                            <button 
-                                type="button"
-                                class="btn-rounded  btn-play btn-spotify-play border-none cursor-pointer"
-                            >
-                                <img 
-                                    id="img-btn-play"
-                                    class=""
-                                    src="assets/icons/btn-play.svg" 
-                                    alt="Play Button">
-                            </button>
-
-                        </div>
-
-        
-
                     </div>
+                </div>
 
+                <div class="media-controls 
+                            rounded-corners
+                            flexbox
+                            justify-content-center
+                            pad-1
+                            "
+                >
+                    <div class="media-player 
+                                flexbox 
+                                justify-content-center 
+                                align-items-center
+                    ">
+                        <button class="btn-media-player btn-rounded border-none" type="button">
+                            <img  class="invert" src="assets/icons/previous.svg" alt="">
+                        </button>
+                        <button class="btn-media-player btn-rounded border-none" type="button">
+                            <img  class="invert" src="assets/icons/play.svg" alt="">
+                        </button>
+                        <button class="btn-media-player btn-rounded border-none" type="button">
+                            <img  class="invert" src="assets/icons/next.svg" alt="">
+                        </button>
+                    </div>
                 </div>
             </main>
-
         </div>
     </body>
 </html>
