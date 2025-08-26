@@ -3,17 +3,6 @@
     width: calc(100% - (2 * var(--val-pad-1)));
 }
 
-/* styling the scrollbar of the main section */
-.main::-webkit-scrollbar {
-    opacity: 0;
-    width: 15px;
-}
-
-.main::-webkit-scrollbar-thumb {
-    background: rgb(80, 80, 80);  
-    border-radius: 8px;
-}
-
 .container-playlists {
     row-gap: 20px;
 }
@@ -23,6 +12,19 @@
     row-gap: 8px;
     column-gap: 8px;
     margin-left: 20px;
+    height: 500px;
+    overflow-y: scroll;
+}
+
+/* styling the scrollbar of the playlist container */
+.container-cards::-webkit-scrollbar {
+    opacity: 0;
+    width: 12px;
+}
+
+.container-cards::-webkit-scrollbar-thumb {
+    background: rgb(80, 80, 80);  
+    border-radius: 8px;
 }
 
 .card {
@@ -83,15 +85,6 @@
     width: 22px;
     height: 22px;
 }
-
-/* Styling the scrollbars */
-/* .container-playlists::-webkit-scrollbar-track {
-    background-color: red;
-} */
-
-/* @supports selector(::-webkit-scrollbar) {
-
-} */
 
 .media-controls {
     height: 50px;
