@@ -1,3 +1,9 @@
+.main {
+    position: relative;
+}
+
+
+
 /* fix the width of all the direct children of .main */
 .main > * {
     width: calc(100% - (2 * var(--val-pad-1)));
@@ -12,8 +18,12 @@
     row-gap: 8px;
     column-gap: 8px;
     margin-left: 20px;
-    height: 500px;
+    max-height: 500px;
     overflow-y: scroll;
+}
+
+.main  {
+    overflow-y: hidden;
 }
 
 /* styling the scrollbar of the playlist container */
@@ -89,7 +99,10 @@
 .media-controls {
     height: 50px;
     background-color: rgb(21, 37, 21);
-
+    position: absolute;
+    bottom: 8px;
+    z-index: 15;
+    width: 92%;
 }
 
 .media-player {

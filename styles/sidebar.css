@@ -24,3 +24,43 @@
 .sidebar footer a:hover {
     text-decoration: underline;
 }
+
+.container-song-cards {
+    row-gap: var(--val-pad-1);
+    height: 73%;
+    overflow-y: scroll;
+}
+
+.container-song-cards::-webkit-scrollbar {
+    width: 11px;
+}
+
+.container-song-cards::-webkit-scrollbar-thumb {
+    background-color: var(--glob-col-dark-gray);
+    border-radius: var(--val-pad-1);
+}
+
+
+.card-song-info {
+    height: 55px;
+    border: 1px solid white;
+}
+
+.card-song-info:hover {
+    background-color: var(--glob-col-dark-gray);
+}
+
+.card-song-info img {
+    width: 30px;
+}
+
+.song-label {
+    align-items: center;
+    column-gap: 15px;
+}
+
+.song-info {
+    width: 80%;
+    height: 96%;
+    row-gap: 5px;
+}
