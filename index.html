@@ -116,7 +116,9 @@
 
                 <div class="container-song-cards pad-1 flexbox flex-dir-col">
 
-                    <div class="card-song-info flexbox space-between rounded-corners pad-1">
+                    <div class="card-song-info flexbox space-between rounded-corners pad-1 cursor-pointer"
+                        data-song-name="" data-audio-file-path="" data-song-index=""
+                    >
 
                         <div class="song-label flexbox">
                             <img 
@@ -124,183 +126,19 @@
                                 src="assets/icons/song.svg" alt="Song Icon"
                             >
     
-                            <div class="song-info flexbox flex-dir-col">
+                            <div class="song-info flexbox flex-dir-col justify-content-center">
                                 <p>
                                     Name of the Song
-                                </p>
-                                <p>
-                                    Artist of the Song
                                 </p>
                             </div>
 
                         </div>
 
                         <img class="invert" 
-                            src="assets/icons/tripple-dots-vertical.svg" alt="Option Icons"
+                            src="assets/icons/tripple-dots-vertical.svg" alt="Options Icon"
                         >
                     </div>
-                    <div class="card-song-info flexbox space-between rounded-corners pad-1">
 
-                        <div class="song-label flexbox">
-                            <img 
-                                class="invert"
-                                src="assets/icons/song.svg" alt="Song Icon"
-                            >
-    
-                            <div class="song-info flexbox flex-dir-col">
-                                <p>
-                                    Name of the Song
-                                </p>
-                                <p>
-                                    Artist of the Song
-                                </p>
-                            </div>
-
-                        </div>
-
-                        <img class="invert" 
-                            src="assets/icons/tripple-dots-vertical.svg" alt="Option Icons"
-                        >
-                    </div>
-                    <div class="card-song-info flexbox space-between rounded-corners pad-1">
-
-                        <div class="song-label flexbox">
-                            <img 
-                                class="invert"
-                                src="assets/icons/song.svg" alt="Song Icon"
-                            >
-    
-                            <div class="song-info flexbox flex-dir-col">
-                                <p>
-                                    Name of the Song
-                                </p>
-                                <p>
-                                    Artist of the Song
-                                </p>
-                            </div>
-
-                        </div>
-
-                        <img class="invert" 
-                            src="assets/icons/tripple-dots-vertical.svg" alt="Option Icons"
-                        >
-                    </div>
-                    <div class="card-song-info flexbox space-between rounded-corners pad-1">
-
-                        <div class="song-label flexbox">
-                            <img 
-                                class="invert"
-                                src="assets/icons/song.svg" alt="Song Icon"
-                            >
-    
-                            <div class="song-info flexbox flex-dir-col">
-                                <p>
-                                    Name of the Song
-                                </p>
-                                <p>
-                                    Artist of the Song
-                                </p>
-                            </div>
-
-                        </div>
-
-                        <img class="invert" 
-                            src="assets/icons/tripple-dots-vertical.svg" alt="Option Icons"
-                        >
-                    </div>
-                    <div class="card-song-info flexbox space-between rounded-corners pad-1">
-
-                        <div class="song-label flexbox">
-                            <img 
-                                class="invert"
-                                src="assets/icons/song.svg" alt="Song Icon"
-                            >
-    
-                            <div class="song-info flexbox flex-dir-col">
-                                <p>
-                                    Name of the Song
-                                </p>
-                                <p>
-                                    Artist of the Song
-                                </p>
-                            </div>
-
-                        </div>
-
-                        <img class="invert" 
-                            src="assets/icons/tripple-dots-vertical.svg" alt="Option Icons"
-                        >
-                    </div>
-                    <div class="card-song-info flexbox space-between rounded-corners pad-1">
-
-                        <div class="song-label flexbox">
-                            <img 
-                                class="invert"
-                                src="assets/icons/song.svg" alt="Song Icon"
-                            >
-    
-                            <div class="song-info flexbox flex-dir-col">
-                                <p>
-                                    Name of the Song
-                                </p>
-                                <p>
-                                    Artist of the Song
-                                </p>
-                            </div>
-
-                        </div>
-
-                        <img class="invert" 
-                            src="assets/icons/tripple-dots-vertical.svg" alt="Option Icons"
-                        >
-                    </div>
-                    <div class="card-song-info flexbox space-between rounded-corners pad-1">
-
-                        <div class="song-label flexbox">
-                            <img 
-                                class="invert"
-                                src="assets/icons/song.svg" alt="Song Icon"
-                            >
-    
-                            <div class="song-info flexbox flex-dir-col">
-                                <p>
-                                    Name of the Song
-                                </p>
-                                <p>
-                                    Artist of the Song
-                                </p>
-                            </div>
-
-                        </div>
-
-                        <img class="invert" 
-                            src="assets/icons/tripple-dots-vertical.svg" alt="Option Icons"
-                        >
-                    </div>
-                    <div class="card-song-info flexbox space-between rounded-corners pad-1">
-
-                        <div class="song-label flexbox">
-                            <img 
-                                class="invert"
-                                src="assets/icons/song.svg" alt="Song Icon"
-                            >
-    
-                            <div class="song-info flexbox flex-dir-col">
-                                <p>
-                                    Name of the Song
-                                </p>
-                                <p>
-                                    Artist of the Song
-                                </p>
-                            </div>
-
-                        </div>
-
-                        <img class="invert" 
-                            src="assets/icons/tripple-dots-vertical.svg" alt="Option Icons"
-                        >
-                    </div>
-                    
                 </div>
 
 
@@ -681,17 +519,22 @@
                                 align-items-center
                     ">
                         <button id="btn-play-previous-song"
-                            class="btn-media-player btn-rounded border-none" type="button">
+                            class="btn-media-player btn-rounded border-none cursor-pointer" 
+                            type="button"
+                        >
                             <img  class="invert" src="assets/icons/previous.svg" alt="">
                         </button>
 
                         <button id="btn-play-pause-song"
-                            class="btn-media-player btn-rounded border-none" type="button">
+                            class="btn-media-player btn-rounded border-none cursor-pointer" 
+                            type="button">
                             <img  class="invert" src="assets/icons/play.svg" alt="">
                         </button>
 
                         <button id="btn-next-song" 
-                            class="btn-media-player btn-rounded border-none" type="button">
+                            class="btn-media-player btn-rounded border-none cursor-pointer" 
+                            type="button"
+                        >
                             <img  class="invert" src="assets/icons/next.svg" alt="">
                         </button>
                     </div>
