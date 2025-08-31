@@ -114,12 +114,9 @@
                 </header>
 
                 <!-- the container which holds all the song cards -->
-                <div class="container-song-cards pad-1 flexbox flex-dir-col">
-
-
-
-                </div>
-
+                <ul
+                    class="container-song-cards pad-1 flexbox flex-dir-col"
+                ></ul>
 
                 <footer class="footer flexbox pad-1">
                     <a href="">Legal</a>
@@ -143,7 +140,6 @@
                     <h2>Your Playlists</h2>
 
                     <div class="container-cards flexbox">
-                        
                         <div
                             class="card flexbox flex-dir-col rounded-corners cursor-pointer"
                         >
@@ -171,43 +167,68 @@
                                 />
                             </button>
                         </div>
-
                     </div>
-
                 </div>
 
-
-                <div class="media-controls 
-                            rounded-corners
-                            flexbox
-                            justify-content-center
-                            pad-1
-                            "
+                <div
+                    class="media-controls rounded-corners flexbox flex-dir-col space-between pad-1"
                 >
-                    <div class="media-player 
-                                flexbox 
-                                justify-content-center 
-                                align-items-center
-                    ">
-                        <button id="btn-play-previous-song"
-                            class="btn-media-player btn-rounded border-none cursor-pointer" 
-                            type="button"
-                        >
-                            <img  class="invert" src="assets/icons/previous.svg" alt="">
-                        </button>
+                    <div
+                        class="media-state flexbox space-between align-items-center margin-auto"
+                    >
+                        <p class="media-label">No Media Playing</p>
 
-                        <button id="btn-play-pause-song"
-                            class="btn-media-player btn-rounded border-none cursor-pointer" 
-                            type="button">
-                            <img  class="invert" src="assets/icons/play.svg" alt="">
-                        </button>
-
-                        <button id="btn-play-next-song" 
-                            class="btn-media-player btn-rounded border-none cursor-pointer" 
-                            type="button"
+                        <div
+                            class="media-player flexbox justify-content-center align-items-center"
                         >
-                            <img  class="invert" src="assets/icons/next.svg" alt="">
-                        </button>
+                            <button
+                                id="btn-play-previous-song"
+                                class="btn-media-player btn-rounded border-none cursor-pointer"
+                                type="button"
+                            >
+                                <img
+                                    class="invert"
+                                    src="assets/icons/previous.svg"
+                                    alt=""
+                                />
+                            </button>
+
+                            <button
+                                id="btn-play-pause-song"
+                                class="btn-media-player btn-rounded border-none cursor-pointer"
+                                type="button"
+                            >
+                                <img
+                                    class="invert"
+                                    src="assets/icons/play.svg"
+                                    alt=""
+                                />
+                            </button>
+
+                            <button
+                                id="btn-play-next-song"
+                                class="btn-media-player btn-rounded border-none cursor-pointer"
+                                type="button"
+                            >
+                                <img
+                                    class="invert"
+                                    src="assets/icons/next.svg"
+                                    alt=""
+                                />
+                            </button>
+                        </div>
+
+                        <div class="media-duration-vol flexbox space-between">
+                            <p>00:00 / 00:00</p>
+                        </div>
+                    </div>
+
+                    <div id="media-seekbar"
+                        class="seekbar flexbox align-items-center margin-auto cursor-pointer"
+                    >
+                        <svg width="13" height="13">
+                            <circle cx="6" cy="6" r="6" fill="white"></circle>
+                        </svg>
                     </div>
                 </div>
             </main>

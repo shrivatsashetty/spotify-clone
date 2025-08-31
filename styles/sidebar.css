@@ -31,6 +31,10 @@
     overflow-y: scroll;
 }
 
+.container-song-cards li {
+    list-style-type: none;
+}
+
 .container-song-cards::-webkit-scrollbar {
     width: 11px;
 }

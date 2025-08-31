@@ -66,6 +66,10 @@
     border-radius: 27px;
 }
 
+.margin-auto {
+    margin: auto;
+}
+
 /* level-1 margin */
 .mar-1 {
     margin: 5px;
