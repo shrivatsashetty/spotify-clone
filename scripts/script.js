@@ -7,9 +7,15 @@ let arrSongObjs = [];
 
 let currentSong = new Audio();
 
-let currentSongIndex = 0;
+let indexCurrentSong = 0;
 
+/* the media control buttons i.e. Play, Pause, Next and Previous song buttons */
 const btnPlayPauseSong = document.getElementById("btn-play-pause-song");
+const btnPlayPreviousSong = document.getElementById("btn-play-previous-song");
+const btnPlayNextSong = document.getElementById("btn-play-next-song");
+
+const containerSongCards = document.querySelector(".container-song-cards");
+
 
 /* an asynchronous function that fetches the resources in the song file directory 
     and returns an array of song paths */
@@ -52,8 +58,6 @@ async function fetchSongPaths() {
 }
 
 
-
-
 /* a function to extract the name of the song given the path to the song file */
 function getSongNameFromPath(songFilePath) {
     /* split the filepath based on the "/" as the delimiter  */
@@ -62,6 +66,7 @@ function getSongNameFromPath(songFilePath) {
     songName = songName.replace(".mp3", "");
     return songName;
 }
+
 
 /* a function to create song objects using the array of song paths */
 function createSongObjs(arrSongPaths) {
@@ -88,7 +93,11 @@ function createSongObjs(arrSongPaths) {
 }
 
 
+/* a function to play or pause the current song */
 function playPauseCurrentSong() {
+
+    highlightCurrentSong();
+
     if (currentSong.paused) {
         currentSong.play();
         btnPlayPauseSong.firstElementChild.src = "assets/icons/pause.svg"
@@ -99,20 +108,73 @@ function playPauseCurrentSong() {
     }
 }
 
+function highlightCurrentSong() {
+    
+    for (const card of containerSongCards.children) {
+        let cardDesc = card.querySelector("p");
 
-function autoPlayNextSong() {
-
-    /* first we need to update the index of the current song,
-     * if we are in the last song of the queue then we need to come back to first song */
-    if(currentSongIndex == arrSongPaths.length - 1) {
-        currentSongIndex = 0;
+        if(cardDesc.classList.contains("highlighted-card")) {
+            cardDesc.classList.remove("highlighted-card");
+            break;
+        }
     }
 
-    currentSongIndex = currentSongIndex += 1;
+    containerSongCards.children[indexCurrentSong]
+        .querySelector("p")
+            .classList.add("highlighted-card");
+}
 
-    currentSong.src = arrSongPaths[currentSongIndex];
+/* a function to play any selected song from the array of songs
+ * the same function can be reused for handling click of nextSong and previous song */
+function playSelectedSong(songIndex) {
+    if (songIndex > arrSongPaths.length -1) {
+        indexCurrentSong = 0;
+    }
+    else if (songIndex < 0) {
+        indexCurrentSong = arrSongPaths.length - 1;
+    }
+    else {
+        indexCurrentSong = songIndex;
+    }
+    currentSong.src = arrSongPaths[indexCurrentSong];
+
     playPauseCurrentSong();
+}
 
+
+/* a function to create the songs library */
+function createSongsLibrary() {
+    
+    for (const songObj of arrSongObjs) {
+        let songCard = `
+            <div class="card-song flexbox space-between rounded-corners pad-1 cursor-pointer"
+                data-song-name="${songObj.songName}" data-song-path="${songObj.songPath}" data-song-index="${songObj.songIndex}"
+                onclick="playSelectedSong(${songObj.songIndex})"
+            >
+
+                <div class="song-label flexbox">
+                    <img 
+                        class="invert"
+                        src="assets/icons/song.svg" alt="Song Icon"
+                    >
+
+                    <div class="song-info flexbox flex-dir-col justify-content-center">
+                        <p>
+                            ${songObj.songName}
+                        </p>
+                    </div>
+
+                </div>
+
+                <img class="invert" 
+                    src="assets/icons/tripple-dots-vertical.svg" alt="Options Icon"
+                >
+            </div>
+            `
+
+        /* updating the innerHTML of the card container by using the above crated element */
+        containerSongCards.innerHTML = containerSongCards.innerHTML + songCard;
+    }    
 }
 
 
@@ -126,10 +188,15 @@ document.addEventListener(
 
         currentSong.src = arrSongPaths[0];
 
+        /* intiate the creation of song object arrays */
+        createSongObjs(arrSongPaths);
+
         /* after the current song finshes playing, we need to autoplay the next song */
         currentSong.addEventListener(
             "ended",
-            autoPlayNextSong
+            () => {
+                playSelectedSong(indexCurrentSong + 1);
+            }
         );
 
         /* handling the event of play-pause button clicked */
@@ -138,7 +205,21 @@ document.addEventListener(
             playPauseCurrentSong
         );
 
-        /* intiate the creation of song object arrays */
-        createSongObjs(arrSongPaths);
+        btnPlayNextSong.addEventListener(
+            "click",
+            () => {
+                playSelectedSong(indexCurrentSong + 1);
+            }
+        );
+
+        btnPlayPreviousSong.addEventListener(
+            "click",
+            () => {
+                playSelectedSong(indexCurrentSong -1);
+            }
+        );
+
+        createSongsLibrary();
+
     }
 );
