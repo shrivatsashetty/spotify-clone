@@ -134,3 +134,9 @@
 
     position: relative;
 }
+
+.seekbar .seekbar-thumb {
+    position: relative;
+    left: 0%;
+    transition: left 0.15s ease-out;
+}

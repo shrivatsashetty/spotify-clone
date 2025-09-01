@@ -10,7 +10,11 @@ let currentSong = new Audio();
 
 let currentSongObj;
 
+/* the index of the currently playing song in the queue
+ * at the beging it will be set to 0 i.e. first song in the queue */
 let indexCurrentSong = 0;
+
+let mediaReadyForPlayback = false;
 
 /* the media control buttons i.e. Play, Pause, Next and Previous song buttons */
 const btnPlayPauseSong = document.getElementById("btn-play-pause-song");
@@ -18,6 +22,11 @@ const btnPlayPreviousSong = document.getElementById("btn-play-previous-song");
 const btnPlayNextSong = document.getElementById("btn-play-next-song");
 
 const containerSongCards = document.querySelector("ul.container-song-cards");
+const lblCurrentSongName = document.querySelector(".media-state p.media-label");
+const lblCurrentSongDuration = document.querySelector(".media-state p.lbl-song-duration");
+
+const seekBar = document.querySelector(".seekbar");
+const seekBarThumb = document.querySelector(".seekbar .seekbar-thumb");
 
 
 /* an asynchronous function that fetches the resources in the song file directory 
@@ -138,8 +147,7 @@ function updateCurrentSong(songIndex) {
 /* this function updates the name of the currently playing song label
  * in the media controls */
 function updateCurrentSongLabel() {
-    const lblCurrentSong = document.querySelector(".media-state p.media-label");
-    lblCurrentSong.innerText = currentSongObj.songName;
+    lblCurrentSongName.innerText = currentSongObj.songName;
 }
 
 
@@ -207,6 +215,32 @@ function createSongsLibrary() {
 }
 
 
+/* a function that takes time in seconds 
+ * and converts to the format MM:SS */
+function convertTimeFormatToMMSS(timeInSeconds) {
+    let strMinutes = Math.floor(timeInSeconds / 60).toString().padStart(2, "0");
+    let strSeconds = Math.floor(timeInSeconds % 60).toString().padStart(2, "0");
+
+    return `${strMinutes}:${strSeconds}`;
+}
+
+
+function updateSongDurationLabel() {
+    let totalSongTime = convertTimeFormatToMMSS(currentSong.duration);
+    let elapsedTime = convertTimeFormatToMMSS(currentSong.currentTime);
+
+    lblCurrentSongDuration.innerText = `${totalSongTime} / ${elapsedTime}`;
+
+}
+
+
+function updateSeekbarProgress() {
+    let percentageSongProgress = (currentSong.currentTime / currentSong.duration) * 100;
+
+    seekBarThumb.style.left = `${percentageSongProgress}%`
+
+}
+
 document.addEventListener(
     "DOMContentLoaded",
     async () => {
@@ -216,12 +250,12 @@ document.addEventListener(
 
         /* intializing the src attribute for the currentSong
          * at first it will be first song in the library */
-        currentSong.src = arrSongPaths[0];
+        currentSong.src = arrSongPaths[indexCurrentSong];
 
         /* intiate the creation of song object arrays */
         createSongObjs(arrSongPaths);
 
-        currentSongObj = arrSongObjs[0];
+        currentSongObj = arrSongObjs[indexCurrentSong];
 
 
         /* after the current song finshes playing, we need to autoplay the next song */
@@ -254,5 +288,33 @@ document.addEventListener(
 
         createSongsLibrary();
 
+        /* set a flag if the media is ready for playback */
+        currentSong.addEventListener(
+            "canplaythrough",
+            () => {
+                mediaReadyForPlayback = true;
+            }
+        );
+
+        /* as the song's time elapses, update the time label */
+        currentSong.addEventListener(
+            "timeupdate",
+            () => {
+                if( (mediaReadyForPlayback) && (!Number.isNaN(currentSong.duration)) ) {
+                    updateSongDurationLabel();
+                    updateSeekbarProgress();
+                }
+            }
+        );
+
+        /* Seek song functionality */
+        seekBar.addEventListener(
+            "click",
+            (e) => {
+                let seekBarProgress = (e.offsetX/e.currentTarget.getBoundingClientRect().width) * 100;
+                seekBarThumb.style.left = `${seekBarProgress}%`;
+                currentSong.currentTime = currentSong.duration * (seekBarProgress/100);
+            }
+        );
     }
 );
