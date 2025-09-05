@@ -4,8 +4,30 @@
     grid-template-columns: repeat(4, 1fr);
     grid-template-areas: 
         "page-header page-header page-header page-header"
-        "sidebar    main   main   main";
+        "sidebar     main        main        main";
 }
+
+@media (max-width: 800px) {
+    .page-content {
+        /* Redefine grid for a single content column */
+        grid-template-columns: 1fr;
+        grid-template-areas: 
+            "page-header"
+            "main";
+    }
+
+    .sidebar {
+        position: absolute;
+        bottom: 0;
+        left: -55%;
+        z-index: 30;
+        width: 45vw;
+
+        transition: left 50ms ease-out;
+    }
+
+}
+
 
 .page-header {
     grid-area: page-header;
@@ -21,7 +43,5 @@
     grid-area: main;
     height: calc(100vh - 100px);
 }
-
-
 
 
