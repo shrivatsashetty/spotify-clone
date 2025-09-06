@@ -6,6 +6,7 @@
 }
 
 .container-playlists {
+    height: calc(100% - 5px);
     row-gap: 20px;
 }
 
@@ -13,8 +14,14 @@
     flex-wrap: wrap;
     row-gap: 8px;
     column-gap: 8px;
-    max-height: 500px;
+    max-height: 65%;
     overflow-y: scroll;
+}
+
+@media (max-width: 780px) {
+    .container-cards {
+        max-height: 45%;
+    }
 }
 
 .main  {
