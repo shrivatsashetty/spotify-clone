@@ -1,6 +1,5 @@
 
 
-
 /* fix the width of all the direct children of .main */
 .main > * {
     width: calc(100% - (2 * var(--val-pad-1)));
@@ -14,7 +13,6 @@
     flex-wrap: wrap;
     row-gap: 8px;
     column-gap: 8px;
-    margin-left: 20px;
     max-height: 500px;
     overflow-y: scroll;
 }
@@ -23,6 +21,25 @@
     position: relative;
     overflow-y: hidden;
 }
+
+.wrapper-playlist-heading {
+    column-gap: 15px;
+}
+
+/* untill the sidebar is visible, 
+    the toggle sidebar button should be hidden */
+@media (min-width: 1170px) {
+
+    .wrapper-playlist-heading .btn-toggle-sidebar  {
+        display: none;
+    }
+
+}
+
+.btn-toggle-sidebar img {
+    width: 20px;
+}
+
 
 /* styling the scrollbar of the playlist container */
 .container-cards::-webkit-scrollbar {
@@ -99,6 +116,17 @@
     position: relative;
 }
 
+@media (max-width: 780px) {
+    .media-state {
+        flex-direction: column;
+        row-gap: 25px;
+    }
+
+    .media-duration-vol {
+        flex-direction: column;
+    }
+}
+
 .media-controls {
     background-color: rgb(21, 37, 21);
     position: absolute;
@@ -112,8 +140,6 @@
 
 .media-player {
     column-gap: 30px;
-    position: absolute;
-    left: 42%;
 }
 
 .btn-media-player {
@@ -123,6 +149,14 @@
 
 .btn-media-player img {
     height: 25px;
+}
+
+.media-duration-vol {
+    column-gap: 25px;
+}
+
+.btn-volume img {
+    height: 20px;
 }
 
 .media-controls .seekbar {
@@ -138,3 +172,4 @@
     left: 0%;
     transition: left 0.15s ease-out;
 }
+

@@ -1,11 +1,43 @@
-.btn-plus:hover {
+
+/* sidebar styles when it's hidden */
+@media (max-width: 1170px) {
+
+    .sidebar {
+        border: 1px solid white;
+        position: absolute;
+        bottom: var(--val-pad-1);
+        z-index: 30;
+        width: max(35%, 420px);
+        transform: translateX(-110%);
+        transition: transform 250ms ease-in-out;
+    }
+
+}
+
+.sidebar-header button:hover {
     background-color: var(--glob-col-dark-gray);
 }
 
-.btn-plus img {
-    height: 16px;
-    width: 16px;
+.sidebar-header button img {
+    height: 15px;
 }
+
+.wrapper-sidebar-heading {
+    column-gap: 10px;
+}
+
+@media (min-width: 1170px) {
+
+    .wrapper-sidebar-heading {
+        width: 100%;
+    }   
+
+    .btn-close-sidebar {
+        display: none;
+    }
+
+}
+
 
 .sidebar footer {
     column-gap: 15px;

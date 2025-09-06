@@ -19,3 +19,7 @@
 body {
     overflow-y: hidden;
 }
+
+.page-content {
+    position: relative;
+}

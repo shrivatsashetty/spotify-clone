@@ -241,6 +241,22 @@ function updateSeekbarProgress() {
 
 }
 
+
+/* a function to mute or unmute the currentsong */
+function muteUnmuteCurrentSong() {
+
+    const imgBtnMuteUnmute = document.querySelector(".btn-volume img");
+
+    if(currentSong.muted) {
+        currentSong.muted = false;
+        imgBtnMuteUnmute.src = "assets/icons/unmute-icon.svg";
+    }
+    else {
+        currentSong.muted = true;
+        imgBtnMuteUnmute.src = "assets/icons/muted-icon.svg";
+    }
+}
+
 document.addEventListener(
     "DOMContentLoaded",
     async () => {
@@ -316,5 +332,35 @@ document.addEventListener(
                 currentSong.currentTime = currentSong.duration * (seekBarProgress/100);
             }
         );
+
+        document.querySelector("#btn-toggle-sidebar")
+            .addEventListener(
+                "click",
+                () => {
+                    document.querySelector(".sidebar").style.transform = "translateX(0%)"
+                }
+            );
+
+            document.querySelector("#btn-close-sidebar")
+                .addEventListener(
+                    "click",
+                    () => {
+                        document.querySelector(".sidebar").style.transform = "translateX(-110%)"
+                    }
+                );
+
+            document.querySelector("#input-media-volume")
+                .addEventListener(
+                    "change",
+                    (e) => {
+                        currentSong.volume = e.target.value / 100;
+                    }
+                );
+            
+            document.getElementById("btn-volume")
+                .addEventListener(
+                    "click",
+                    muteUnmuteCurrentSong
+                );
     }
 );

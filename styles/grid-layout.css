@@ -7,7 +7,7 @@
         "sidebar     main        main        main";
 }
 
-@media (max-width: 800px) {
+@media (max-width: 1170px) {
     .page-content {
         /* Redefine grid for a single content column */
         grid-template-columns: 1fr;
@@ -16,18 +16,7 @@
             "main";
     }
 
-    .sidebar {
-        position: absolute;
-        bottom: 0;
-        left: -55%;
-        z-index: 30;
-        width: 45vw;
-
-        transition: left 50ms ease-out;
-    }
-
 }
-
 
 .page-header {
     grid-area: page-header;
