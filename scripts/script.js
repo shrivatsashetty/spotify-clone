@@ -1,6 +1,10 @@
 /* global variables */
 const domParser = new DOMParser();
 
+let arrPlaylistPaths;
+
+let arrPlaylistObjs;
+
 let arrSongPaths = [];
 
 let arrSongObjs = [];
@@ -27,40 +31,54 @@ const lblCurrentSongDuration = document.querySelector(".media-state p.lbl-song-d
 const seekBar = document.querySelector(".seekbar");
 const seekBarThumb = document.querySelector(".seekbar .seekbar-thumb");
 
-/* an asynchronous function that fetches the resources in the song file directory 
-    and returns an array of song paths */
-async function fetchSongPaths() {
-    let arrSongPaths = [];
 
-    let response = await fetch("http://127.0.0.1:3000/files/song-files/");
-    let strSongsDir = await response.text();
+async function fetchDirectoryContents(directoryPath) {
+    let arrContentPaths = [];
+
+    let response = await fetch(`http://127.0.0.1:3000/${directoryPath}`);
+    let strDirContentHTML = await response.text();
 
     /* parsing the html formatted string to an HTML document */
-    const docSongsDir = domParser.parseFromString(strSongsDir, "text/html");
+    const docDirContents = domParser.parseFromString(strDirContentHTML, "text/html");
 
     /* the songs will be stored in the td>a element of the doucument */
-    let songPaths = docSongsDir.body
+    let contentPaths = docDirContents.body
         .querySelector("tbody")
         .getElementsByTagName("a");
 
     /* here we use a classical for loop
      * in order to start the iteration from the element with index 1 */
-    for (let i = 1; i < songPaths.length; i++) {
-        const element = songPaths[i];
-        arrSongPaths.push(element.href);
+    for (let i = 1; i < contentPaths.length; i++) {
+        const element = contentPaths[i];
+        arrContentPaths.push(element.href);
     }
 
     /* this function returns a promise
      * this promise resolves if the array of song paths is not null
      * otherwise the promise is rejected */
     return new Promise((resolve, reject) => {
-        if (arrSongPaths) {
-            resolve(arrSongPaths);
+        if (arrContentPaths) {
+            resolve(arrContentPaths);
         } 
         else {
-            reject("Error, No Songs Found!!");
-        }
+            reject("Error, No Content Found!!");
+        }   
     });
+}
+
+async function fetchPlaylistsPaths() {
+    arrPlaylistPaths = await fetchDirectoryContents("songs/");
+    console.log(arrPlaylistPaths);
+}
+
+
+/* an asynchronous function that fetches the resources in the song file directory 
+    and returns an array of song paths */
+async function fetchSongPathsFromPlaylist(playlist) {
+
+    arrSongPaths = await fetchDirectoryContents(`songs/${playlist}/`);
+    console.log(arrSongPaths);
+    
 }
 
 /* a function to extract the name of the song given the path to the song file */
@@ -237,7 +255,7 @@ function muteUnmuteCurrentSong() {
 document.addEventListener("DOMContentLoaded", async () => {
     /* setting the global variables */
 
-    arrSongPaths = await fetchSongPaths();
+    await fetchSongPathsFromPlaylist("All-Songs");
 
     /* intializing the src attribute for the currentSong
      * at first it will be first song in the library */
@@ -311,4 +329,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     document
         .getElementById("btn-volume")
         .addEventListener("click", muteUnmuteCurrentSong);
+
+    await fetchPlaylistsPaths();
+
 });
