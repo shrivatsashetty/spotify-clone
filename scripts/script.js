@@ -1,9 +1,9 @@
 /* global variables */
 const domParser = new DOMParser();
 
-let arrPlaylistPaths;
+let arrPlaylistPaths = [];
 
-let arrPlaylistObjs;
+let arrPlaylistObjs = [];
 
 let arrSongPaths = [];
 
@@ -35,7 +35,7 @@ const seekBarThumb = document.querySelector(".seekbar .seekbar-thumb");
 async function fetchDirectoryContents(directoryPath) {
     let arrContentPaths = [];
 
-    let response = await fetch(`http://127.0.0.1:3000/${directoryPath}`);
+    let response = await fetch(directoryPath);
     let strDirContentHTML = await response.text();
 
     /* parsing the html formatted string to an HTML document */
@@ -71,12 +71,72 @@ async function fetchPlaylistsPaths() {
     console.log(arrPlaylistPaths);
 }
 
+async function createArrPlaylistObjs() {
+
+    for (const playlistPath of arrPlaylistPaths) {        
+        let response = await fetch(`${playlistPath}/info.json`);
+        let data = await response.json();
+        data.playlistPath = playlistPath;
+        arrPlaylistObjs.push(data);
+    }
+
+    console.log(arrPlaylistObjs);    
+}
+
+function createPlaylistCards() {
+    const containerPlaylists = document.querySelector(".container-playlists .container-cards");
+
+    arrPlaylistObjs.forEach((playlistObj) => {
+        let strPlaylistCard = `
+            <div
+                class="card card-playlist flexbox flex-dir-col rounded-corners cursor-pointer"
+                data-playlistPath="${playlistObj.playlistPath}"
+            >
+                <img
+                    class="card-img rounded-corners"
+                    src="${playlistObj.playlistPath}/cover.jpeg"
+                    alt="Song Thumbnail"
+                />
+
+                <h3 class="card-heading txt-size-base">
+                    ${playlistObj.playlistName}
+                </h3>
+
+                <p class="card-desc">${playlistObj.playlistDesc}</p>
+
+                <button
+                    type="button"
+                    class="btn-rounded btn-play btn-spotify-play border-none cursor-pointer"
+                >
+                    <img
+                        id="img-btn-play"
+                        class=""
+                        src="assets/icons/btn-play.svg"
+                        alt="Play Button"
+                    />
+                </button>
+            </div>
+            `
+
+        /* converting the above HTML formatted string to a HTML document and then an HTML element*/
+        let docPlaylistCard = domParser.parseFromString(strPlaylistCard, "text/html");
+        let playlistCard = docPlaylistCard.body.querySelector(".card-playlist");
+        
+        /* adding an event listner to each song */
+        playlistCard.addEventListener("click", () => {
+            
+        });
+
+        containerPlaylists.appendChild(playlistCard);
+
+    });
+}
 
 /* an asynchronous function that fetches the resources in the song file directory 
     and returns an array of song paths */
-async function fetchSongPathsFromPlaylist(playlist) {
+async function updateSongPathsFromPlaylist(playlist) {
 
-    arrSongPaths = await fetchDirectoryContents(`songs/${playlist}/`);
+    arrSongPaths = await fetchDirectoryContents(playlist.playlistPath);
     console.log(arrSongPaths);
     
 }
@@ -252,84 +312,105 @@ function muteUnmuteCurrentSong() {
     }
 }
 
-document.addEventListener("DOMContentLoaded", async () => {
-    /* setting the global variables */
 
-    await fetchSongPathsFromPlaylist("All-Songs");
+async function updatePlaylists() {
+
+    await fetchPlaylistsPaths();
+
+    await createArrPlaylistObjs();
+
+    createPlaylistCards();
+}
+
+async function updateSongsFromPlaylist(playList) {
+
+    await updateSongPathsFromPlaylist(playList);
 
     /* intializing the src attribute for the currentSong
      * at first it will be first song in the library */
-    currentSong.src = arrSongPaths[indexCurrentSong];
+    currentSong.src = arrSongPaths[0];
 
     /* intiate the creation of song object arrays */
     createSongObjs(arrSongPaths);
 
-    currentSongObj = arrSongObjs[indexCurrentSong];
+    currentSongObj = arrSongObjs[0];
 
     /* after the current song finshes playing, we need to autoplay the next song */
     currentSong.addEventListener("ended", () => {
         updateCurrentSong(indexCurrentSong + 1);
     });
 
-    /* handling the event of play-pause button clicked */
-    btnPlayPauseSong.addEventListener("click", playPauseCurrentSong);
-
-    btnPlayNextSong.addEventListener("click", () => {
-        updateCurrentSong(indexCurrentSong + 1);
-    });
-
-    btnPlayPreviousSong.addEventListener("click", () => {
-        updateCurrentSong(indexCurrentSong - 1);
-    });
-
+    /* update the Songs Library in the sidebar */
     createSongsLibrary();
+}
 
-    /* set a flag if the media is ready for playback */
-    currentSong.addEventListener("canplaythrough", () => {
-        mediaReadyForPlayback = true;
-    });
 
-    /* as the song's time elapses, update the time label */
-    currentSong.addEventListener("timeupdate", () => {
-        if (mediaReadyForPlayback && !Number.isNaN(currentSong.duration)) {
-            updateSongDurationLabel();
-            updateSeekbarProgress();
-        }
-    });
+document.addEventListener("DOMContentLoaded", async () => {
+ 
+    await updatePlaylists();
 
-    /* Seek song functionality */
-    seekBar.addEventListener("click", (e) => {
-        let seekBarProgress =
-            (e.offsetX / e.currentTarget.getBoundingClientRect().width) * 100;
-        seekBarThumb.style.left = `${seekBarProgress}%`;
-        currentSong.currentTime =
-            currentSong.duration * (seekBarProgress / 100);
-    });
 
-    document
-        .querySelector("#btn-toggle-sidebar")
-        .addEventListener("click", () => {
-            document.querySelector(".sidebar").style.transform =
-                "translateX(0%)";
-        });
+    await updateSongsFromPlaylist(arrPlaylistObjs[0]);
 
-    document
-        .querySelector("#btn-close-sidebar")
-        .addEventListener("click", () => {
-            document.querySelector(".sidebar").style.transform =
-                "translateX(-110%)";
-        });
 
-    document
-        .querySelector("#input-media-volume")
-        .addEventListener("change", (e) => {
-            currentSong.volume = e.target.value / 100;
-        });
+    /* handling the event of play-pause button clicked */
+    // btnPlayPauseSong.addEventListener("click", playPauseCurrentSong);
 
-    document
-        .getElementById("btn-volume")
-        .addEventListener("click", muteUnmuteCurrentSong);
+    // btnPlayNextSong.addEventListener("click", () => {
+    //     updateCurrentSong(indexCurrentSong + 1);
+    // });
 
-    await fetchPlaylistsPaths();
+    // btnPlayPreviousSong.addEventListener("click", () => {
+    //     updateCurrentSong(indexCurrentSong - 1);
+    // });
+
+    
+
+    // /* set a flag if the media is ready for playback */
+    // currentSong.addEventListener("canplaythrough", () => {
+    //     mediaReadyForPlayback = true;
+    // });
+
+    // /* as the song's time elapses, update the time label */
+    // currentSong.addEventListener("timeupdate", () => {
+    //     if (mediaReadyForPlayback && !Number.isNaN(currentSong.duration)) {
+    //         updateSongDurationLabel();
+    //         updateSeekbarProgress();
+    //     }
+    // });
+
+    // /* Seek song functionality */
+    // seekBar.addEventListener("click", (e) => {
+    //     let seekBarProgress =
+    //         (e.offsetX / e.currentTarget.getBoundingClientRect().width) * 100;
+    //     seekBarThumb.style.left = `${seekBarProgress}%`;
+    //     currentSong.currentTime =
+    //         currentSong.duration * (seekBarProgress / 100);
+    // });
+
+    // document
+    //     .querySelector("#btn-toggle-sidebar")
+    //     .addEventListener("click", () => {
+    //         document.querySelector(".sidebar").style.transform =
+    //             "translateX(0%)";
+    //     });
+
+    // document
+    //     .querySelector("#btn-close-sidebar")
+    //     .addEventListener("click", () => {
+    //         document.querySelector(".sidebar").style.transform =
+    //             "translateX(-110%)";
+    //     });
+
+    // document
+    //     .querySelector("#input-media-volume")
+    //     .addEventListener("change", (e) => {
+    //         currentSong.volume = e.target.value / 100;
+    //     });
+
+    // document
+    //     .getElementById("btn-volume")
+    //     .addEventListener("click", muteUnmuteCurrentSong);
+
 
 });
