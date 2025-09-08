@@ -70,7 +70,7 @@ async function fetchDirectoryContents(directoryPath) {
 }
 
 async function fetchPlaylistsPaths() {
-    arrPlaylistPaths = await fetchDirectoryContents("songs/");
+    arrPlaylistPaths = await fetchDirectoryContents("assets/songs/");
 }
 
 async function createArrPlaylistObjs() {
