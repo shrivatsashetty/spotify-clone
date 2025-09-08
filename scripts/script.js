@@ -26,11 +26,12 @@ const btnPlayNextSong = document.getElementById("btn-play-next-song");
 
 const containerSongCards = document.querySelector("ul.container-song-cards");
 const lblCurrentSongName = document.querySelector(".media-state p.media-label");
-const lblCurrentSongDuration = document.querySelector(".media-state p.lbl-song-duration");
+const lblCurrentSongDuration = document.querySelector(
+    ".media-state p.lbl-song-duration"
+);
 
 const seekBar = document.querySelector(".seekbar");
 const seekBarThumb = document.querySelector(".seekbar .seekbar-thumb");
-
 
 async function fetchDirectoryContents(directoryPath) {
     let arrContentPaths = [];
@@ -39,7 +40,10 @@ async function fetchDirectoryContents(directoryPath) {
     let strDirContentHTML = await response.text();
 
     /* parsing the html formatted string to an HTML document */
-    const docDirContents = domParser.parseFromString(strDirContentHTML, "text/html");
+    const docDirContents = domParser.parseFromString(
+        strDirContentHTML,
+        "text/html"
+    );
 
     /* the songs will be stored in the td>a element of the doucument */
     let contentPaths = docDirContents.body
@@ -59,38 +63,34 @@ async function fetchDirectoryContents(directoryPath) {
     return new Promise((resolve, reject) => {
         if (arrContentPaths) {
             resolve(arrContentPaths);
-        } 
-        else {
+        } else {
             reject("Error, No Content Found!!");
-        }   
+        }
     });
 }
 
 async function fetchPlaylistsPaths() {
     arrPlaylistPaths = await fetchDirectoryContents("songs/");
-    console.log(arrPlaylistPaths);
 }
 
 async function createArrPlaylistObjs() {
-
-    for (const playlistPath of arrPlaylistPaths) {        
+    for (const playlistPath of arrPlaylistPaths) {
         let response = await fetch(`${playlistPath}/info.json`);
         let data = await response.json();
         data.playlistPath = playlistPath;
         arrPlaylistObjs.push(data);
     }
-
-    console.log(arrPlaylistObjs);    
 }
 
 function createPlaylistCards() {
-    const containerPlaylists = document.querySelector(".container-playlists .container-cards");
+    const containerPlaylists = document.querySelector(
+        ".container-playlists .container-cards"
+    );
 
-    arrPlaylistObjs.forEach((playlistObj) => {
+    for (const playlistObj of arrPlaylistObjs) {
         let strPlaylistCard = `
             <div
                 class="card card-playlist flexbox flex-dir-col rounded-corners cursor-pointer"
-                data-playlistPath="${playlistObj.playlistPath}"
             >
                 <img
                     class="card-img rounded-corners"
@@ -106,7 +106,7 @@ function createPlaylistCards() {
 
                 <button
                     type="button"
-                    class="btn-rounded btn-play btn-spotify-play border-none cursor-pointer"
+                    class="btn-rounded btn-play btn-spotify-play border-none cursor-pointer flexbox justify-content-center align-items-center"
                 >
                     <img
                         id="img-btn-play"
@@ -116,29 +116,44 @@ function createPlaylistCards() {
                     />
                 </button>
             </div>
-            `
-
+            `;
         /* converting the above HTML formatted string to a HTML document and then an HTML element*/
-        let docPlaylistCard = domParser.parseFromString(strPlaylistCard, "text/html");
+        let docPlaylistCard = domParser.parseFromString(
+            strPlaylistCard,
+            "text/html"
+        );
+
         let playlistCard = docPlaylistCard.body.querySelector(".card-playlist");
-        
-        /* adding an event listner to each song */
-        playlistCard.addEventListener("click", () => {
-            
+
+        /* get the play button inside the playlist card
+         * this button will start the first song in the playlist when clicked */
+        let btnStartPlaylist = playlistCard.querySelector(".btn-play");
+
+        /* adding an event listner to each playlist card
+         * will fetch the song from the playlist and update the songs library */
+        playlistCard.addEventListener("click", async () => {
+            await updateSongsFromPlaylist(playlistObj);
+        });
+
+        /* will first update the songs library from the respective playlist
+         * then start the first song in the playlist */
+        btnStartPlaylist.addEventListener("click", async (e) => {
+            e.stopPropagation();
+            await updateSongsFromPlaylist(playlistObj);
+            playPauseCurrentSong();
         });
 
         containerPlaylists.appendChild(playlistCard);
-
-    });
+    }
 }
 
 /* an asynchronous function that fetches the resources in the song file directory 
     and returns an array of song paths */
 async function updateSongPathsFromPlaylist(playlist) {
+    let dirContents = await fetchDirectoryContents(playlist.playlistPath);
 
-    arrSongPaths = await fetchDirectoryContents(playlist.playlistPath);
-    console.log(arrSongPaths);
-    
+    /* filter only the song files i.e. the files ending with .mp3 from the directory contents */
+    arrSongPaths = dirContents.filter((path) => path.endsWith(".mp3"));
 }
 
 /* a function to extract the name of the song given the path to the song file */
@@ -154,7 +169,10 @@ function getSongNameFromPath(songFilePath) {
 }
 
 /* a function to create song objects using the array of song paths */
-function createSongObjs(arrSongPaths) {
+function createArrSongObjs(arrSongPaths) {
+    /* clear any item in the array that already exist */
+    arrSongObjs = [];
+
     let songName;
 
     for (let i = 0; i < arrSongPaths.length; i++) {
@@ -178,11 +196,8 @@ function playPauseCurrentSong() {
 
     if (currentSong.paused) {
         currentSong.play();
-        btnPlayPauseSong.firstElementChild.src = "assets/icons/pause.svg";
-    } 
-    else {
+    } else {
         currentSong.pause();
-        btnPlayPauseSong.firstElementChild.src = "assets/icons/play.svg";
     }
 }
 
@@ -191,11 +206,9 @@ function playPauseCurrentSong() {
 function updateCurrentSong(songIndex) {
     if (songIndex > arrSongPaths.length - 1) {
         indexCurrentSong = 0;
-    } 
-    else if (songIndex < 0) {
+    } else if (songIndex < 0) {
         indexCurrentSong = arrSongPaths.length - 1;
-    } 
-    else {
+    } else {
         indexCurrentSong = songIndex;
     }
 
@@ -232,6 +245,10 @@ function highlightCurrentSong() {
 
 /* a function to create the songs library */
 function createSongsLibrary() {
+    /* first empty the existing contents of the 
+    sidebar */
+    containerSongCards.innerHTML = "";
+
     for (const songObj of arrSongObjs) {
         let strSongCardHTML = `
             <li class="card-song flexbox space-between rounded-corners pad-1 cursor-pointer"
@@ -288,7 +305,7 @@ function updateSongDurationLabel() {
     let totalSongTime = convertTimeFormatToMMSS(currentSong.duration);
     let elapsedTime = convertTimeFormatToMMSS(currentSong.currentTime);
 
-    lblCurrentSongDuration.innerText = `${totalSongTime} / ${elapsedTime}`;
+    lblCurrentSongDuration.innerText = `${elapsedTime} / ${totalSongTime}`;
 }
 
 function updateSeekbarProgress() {
@@ -298,6 +315,14 @@ function updateSeekbarProgress() {
     seekBarThumb.style.left = `${percentageSongProgress}%`;
 }
 
+function updateBtnPlayPauseSong() {
+    if (currentSong.paused) {
+        btnPlayPauseSong.firstElementChild.src = "assets/icons/play.svg";
+    } else {
+        btnPlayPauseSong.firstElementChild.src = "assets/icons/pause.svg";
+    }
+}
+
 /* a function to mute or unmute the currentsong */
 function muteUnmuteCurrentSong() {
     const imgBtnMuteUnmute = document.querySelector(".btn-volume img");
@@ -305,16 +330,13 @@ function muteUnmuteCurrentSong() {
     if (currentSong.muted) {
         currentSong.muted = false;
         imgBtnMuteUnmute.src = "assets/icons/unmute-icon.svg";
-    } 
-    else {
+    } else {
         currentSong.muted = true;
         imgBtnMuteUnmute.src = "assets/icons/muted-icon.svg";
     }
 }
 
-
-async function updatePlaylists() {
-
+async function preparePlaylists() {
     await fetchPlaylistsPaths();
 
     await createArrPlaylistObjs();
@@ -323,94 +345,115 @@ async function updatePlaylists() {
 }
 
 async function updateSongsFromPlaylist(playList) {
-
     await updateSongPathsFromPlaylist(playList);
+
+    /* when the songs are ready, 
+     setting the default index of currentSong to 0 i.e. first song */
+    indexCurrentSong = 0;
 
     /* intializing the src attribute for the currentSong
      * at first it will be first song in the library */
-    currentSong.src = arrSongPaths[0];
+    currentSong.src = arrSongPaths[indexCurrentSong];
 
     /* intiate the creation of song object arrays */
-    createSongObjs(arrSongPaths);
+    createArrSongObjs(arrSongPaths);
 
-    currentSongObj = arrSongObjs[0];
-
-    /* after the current song finshes playing, we need to autoplay the next song */
-    currentSong.addEventListener("ended", () => {
-        updateCurrentSong(indexCurrentSong + 1);
-    });
+    currentSongObj = arrSongObjs[indexCurrentSong];
 
     /* update the Songs Library in the sidebar */
     createSongsLibrary();
 }
 
 
-document.addEventListener("DOMContentLoaded", async () => {
- 
-    await updatePlaylists();
+function assignEventListners() {
+    /* handling the event of play-pause button clicked */
+    btnPlayPauseSong.addEventListener("click", playPauseCurrentSong);
 
+    /* play Next song */
+    btnPlayNextSong.addEventListener("click", () => {
+        updateCurrentSong(indexCurrentSong + 1);
+    });
+
+    /* play previous song */
+    btnPlayPreviousSong.addEventListener("click", () => {
+        updateCurrentSong(indexCurrentSong - 1);
+    });
+
+    /* after the current song finshes playing, we need to autoplay the next song */
+    currentSong.addEventListener("ended", () => {
+        updateCurrentSong(indexCurrentSong + 1);
+    });
+
+    /* event handler to update the play-pause button when the song is paused */
+    currentSong.addEventListener("pause", updateBtnPlayPauseSong);
+
+    /* event handler to update the play-pause button when the song is paused */
+    currentSong.addEventListener("play", updateBtnPlayPauseSong);
+
+    /* set a flag if the media is ready for playback
+     * also update the label of the current song since it's triggered when song changes */
+    currentSong.addEventListener("canplaythrough", () => {
+        mediaReadyForPlayback = true;
+
+        updateCurrentSongLabel();
+        updateSongDurationLabel();
+        updateSeekbarProgress();
+        updateBtnPlayPauseSong();
+    });
+
+    /* as the song's time elapses, update the time label */
+    currentSong.addEventListener("timeupdate", () => {
+        if (mediaReadyForPlayback && !Number.isNaN(currentSong.duration)) {
+            updateSongDurationLabel();
+            updateSeekbarProgress();
+        }
+    });
+
+    /* Seek song functionality */
+    seekBar.addEventListener("click", (e) => {
+        let seekBarProgress =
+            (e.offsetX / e.currentTarget.getBoundingClientRect().width) * 100;
+        seekBarThumb.style.left = `${seekBarProgress}%`;
+        currentSong.currentTime =
+            currentSong.duration * (seekBarProgress / 100);
+    });
+
+    /* an event listner to unhide the sidebar in mobile devices */
+    document
+        .querySelector("#btn-toggle-sidebar")
+        .addEventListener("click", () => {
+            document.querySelector(".sidebar").style.transform =
+                "translateX(0%)";
+        });
+
+    /* a function to hide the sidebar when the close button in the sidebar is clicked */
+    document
+        .querySelector("#btn-close-sidebar")
+        .addEventListener("click", () => {
+            document.querySelector(".sidebar").style.transform =
+                "translateX(-110%)";
+        });
+
+    /* an event listner function to change the media volume when the volume slider is changed */
+    document
+        .querySelector("#input-media-volume")
+        .addEventListener("change", (e) => {
+            currentSong.volume = e.target.value / 100;
+        });
+
+    /* a handler function to mute-unmute the current song */
+    document
+        .getElementById("btn-volume")
+        .addEventListener("click", muteUnmuteCurrentSong);
+}
+
+
+
+document.addEventListener("DOMContentLoaded", async () => {
+    await preparePlaylists();
 
     await updateSongsFromPlaylist(arrPlaylistObjs[0]);
 
-
-    /* handling the event of play-pause button clicked */
-    // btnPlayPauseSong.addEventListener("click", playPauseCurrentSong);
-
-    // btnPlayNextSong.addEventListener("click", () => {
-    //     updateCurrentSong(indexCurrentSong + 1);
-    // });
-
-    // btnPlayPreviousSong.addEventListener("click", () => {
-    //     updateCurrentSong(indexCurrentSong - 1);
-    // });
-
-    
-
-    // /* set a flag if the media is ready for playback */
-    // currentSong.addEventListener("canplaythrough", () => {
-    //     mediaReadyForPlayback = true;
-    // });
-
-    // /* as the song's time elapses, update the time label */
-    // currentSong.addEventListener("timeupdate", () => {
-    //     if (mediaReadyForPlayback && !Number.isNaN(currentSong.duration)) {
-    //         updateSongDurationLabel();
-    //         updateSeekbarProgress();
-    //     }
-    // });
-
-    // /* Seek song functionality */
-    // seekBar.addEventListener("click", (e) => {
-    //     let seekBarProgress =
-    //         (e.offsetX / e.currentTarget.getBoundingClientRect().width) * 100;
-    //     seekBarThumb.style.left = `${seekBarProgress}%`;
-    //     currentSong.currentTime =
-    //         currentSong.duration * (seekBarProgress / 100);
-    // });
-
-    // document
-    //     .querySelector("#btn-toggle-sidebar")
-    //     .addEventListener("click", () => {
-    //         document.querySelector(".sidebar").style.transform =
-    //             "translateX(0%)";
-    //     });
-
-    // document
-    //     .querySelector("#btn-close-sidebar")
-    //     .addEventListener("click", () => {
-    //         document.querySelector(".sidebar").style.transform =
-    //             "translateX(-110%)";
-    //     });
-
-    // document
-    //     .querySelector("#input-media-volume")
-    //     .addEventListener("change", (e) => {
-    //         currentSong.volume = e.target.value / 100;
-    //     });
-
-    // document
-    //     .getElementById("btn-volume")
-    //     .addEventListener("click", muteUnmuteCurrentSong);
-
+    assignEventListners();
 
 });
